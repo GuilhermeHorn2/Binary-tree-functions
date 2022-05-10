@@ -1,4 +1,5 @@
 
+
 typedef struct node{
     int data;
     struct node *esq;
@@ -7,28 +8,54 @@ typedef struct node{
 
 typedef struct node* p_node;
 
-node* criar(int x,node* esq,node* dir){
+/*node* criar(int x,node* esq,node* dir){
     node* k = malloc(sizeof(node));
     k->data = x;
     k->esq = esq;
     k->dir = dir;
     return k;
+}*/
+
+node* get_new_node(int x){
+    node * novo = malloc(sizeof(node));
+    novo->data = x;
+    novo->esq = NULL;
+    novo->dir = NULL;
+    return novo;
+}
+
+//x <= root --- ESQUERDA , x > root ---- DIREITA
+node* insert(node *root,int x){
+    if(root == NULL){
+        root = get_new_node(x);
+    }
+    else if(x <= root->data){
+        root->esq = insert(root->esq,x);
+    }
+    else if(x > root->data){
+        root->dir = insert(root->dir,x);
+    }
+    return root;
+}
+
+node* criar(){
+    return NULL;
 }
 
 node* search(node* root,int x){
     node* esq;
     //se a tree ta vazia ou se o 1 valor e o procurado
-    if(root == NULL || raiz->data == x){
+    if(root == NULL || root->data == x){
         return root;
     }
-    
+
     esq = search(root->esq,x);//perceba que esq so pode sr NULL ou x,pois o 1 if retorna apenas essas 2 possibilidades
-    
+
     //se esq nao for null ele e x,entao achamos oque queriamos
     if(esq != NULL){
         return esq;
     }
-    
+
     //se pela esquerda nao foi encontrado o valor,vamos tentar pela direita:
     return search(root->dir,x);
 }
@@ -58,11 +85,17 @@ int heigth(node* raiz){
     return max(heigth(raiz->esq),heigth(raiz->dir)) + 1;
 }
 
+
+
 int main(){
     /* \n;||(or) e &&(and)*/
+    node* root = criar();//root = NULL
+    root = insert(root,15);
 
 
 
         return 0;
 }
+
+
 
