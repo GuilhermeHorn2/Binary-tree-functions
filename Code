@@ -1,0 +1,68 @@
+
+typedef struct node{
+    int data;
+    struct node *esq;
+    struct node *dir;
+}node;
+
+typedef struct node* p_node;
+
+node* criar(int x,node* esq,node* dir){
+    node* k = malloc(sizeof(node));
+    k->data = x;
+    k->esq = esq;
+    k->dir = dir;
+    return k;
+}
+
+node* search(node* root,int x){
+    node* esq;
+    //se a tree ta vazia ou se o 1 valor e o procurado
+    if(root == NULL || raiz->data == x){
+        return root;
+    }
+    
+    esq = search(root->esq,x);//perceba que esq so pode sr NULL ou x,pois o 1 if retorna apenas essas 2 possibilidades
+    
+    //se esq nao for null ele e x,entao achamos oque queriamos
+    if(esq != NULL){
+        return esq;
+    }
+    
+    //se pela esquerda nao foi encontrado o valor,vamos tentar pela direita:
+    return search(root->dir,x);
+}
+
+int n_nodes(node* raiz){
+    if(raiz == NULL){
+        return 0;
+    }
+    return n_nodes(raiz->esq) + n_nodes(raiz->dir) + 1;
+}
+
+
+//funçao auxiliar para a funçao heigth
+int max(int a,int b){
+    int r = b;
+    if(a > b){
+        r = a;
+    }
+    return r;
+}
+
+int heigth(node* raiz){
+    //altura de uma tree vazia e -1
+    if(raiz == NULL){
+        return -1;
+    }
+    return max(heigth(raiz->esq),heigth(raiz->dir)) + 1;
+}
+
+int main(){
+    /* \n;||(or) e &&(and)*/
+
+
+
+        return 0;
+}
+
